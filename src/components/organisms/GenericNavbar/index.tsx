@@ -4,7 +4,7 @@ import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 const GenericNavbar = () => {
   return (
-    <div className="w-full">
+    <div className="w-full border-b border-CareerCraftForeGroundLight sticky top-0 bg-CareerCraftBackground">
       <div className=" flex justify-between w-full px-4 py-2 items-center">
         {/* left side */}
         <GiHamburgerMenu className="md:hidden text-CareerCraftWhite"></GiHamburgerMenu>

@@ -1,5 +1,6 @@
+"use client";
 import React from "react";
-
+import { redirect } from "next/navigation";
 interface ButtonProps {
   text: string;
   icon?: any;
@@ -15,7 +16,10 @@ const PrimaryButton = (props: ButtonProps) => {
 
 export const SecondaryButton = (props: ButtonProps) => {
   return (
-    <button className="text-CareerCraftPrimary rounded-md py-2 px-2 border border-CareerCraftPrimary text-sm hover:bg-CareerCraftPrimary hover:text-CareerCraftWhite ">
+    <button
+      onClick={() => redirect("/create-resume")}
+      className="text-CareerCraftPrimary rounded-md py-2 px-2 border border-CareerCraftPrimary text-sm hover:bg-CareerCraftPrimary hover:text-CareerCraftWhite "
+    >
       {props.icon} {props.text}
     </button>
   );

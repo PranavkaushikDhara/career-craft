@@ -1,5 +1,5 @@
 import PrimaryButton from "@/components/atoms/Button";
-import Search from "@/components/atoms/Search";
+import Input from "@/components/atoms/Input";
 import Link from "next/link";
 import React from "react";
 import { TiTickOutline } from "react-icons/ti";
@@ -24,7 +24,7 @@ const Register = () => {
           >
             Full Name
           </label>
-          <Search
+          <Input
             placeholder="Enter your full name"
             name="name"
             //   className="w-full"
@@ -37,7 +37,7 @@ const Register = () => {
           >
             Email Address
           </label>
-          <Search
+          <Input
             placeholder="Enter your email"
             name="email"
             //   className="w-full"
@@ -51,7 +51,7 @@ const Register = () => {
           >
             Password
           </label>
-          <Search
+          <Input
             placeholder="Enter your password"
             type="password"
             name="password"
@@ -65,7 +65,7 @@ const Register = () => {
           >
             Confirm Password
           </label>
-          <Search
+          <Input
             placeholder="Confirm your password"
             name="confirm-password"
             type="password"

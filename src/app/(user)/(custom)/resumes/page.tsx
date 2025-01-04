@@ -1,7 +1,4 @@
 import React from "react";
-import Dropdown from "@/components/atoms/Dropdown";
-import Search from "@/components/atoms/Search";
-import Navbar from "@/components/organisms/Navbar";
 import Table from "@/components/organisms/Table";
 import clsx from "clsx";
 import Link from "next/link";

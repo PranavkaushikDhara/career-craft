@@ -1,4 +1,5 @@
 import PrimaryButton, { SecondaryButton } from "@/components/atoms/Button";
+import ButtonLink, { ButonLinkSecondary } from "@/components/atoms/ButtonLink";
 import React from "react";
 
 const Banner = () => {
@@ -10,13 +11,24 @@ const Banner = () => {
           Transform Your Resume <br />
           <span className="text-CareerCraftPrimary">for Every Opportunity</span>
         </span>
-        <p className="text-sm text-CareerCraftText w-[50%]">
+        <p className="text-sm text-CareerCraftText ">
           Customize your resume instantly for any Job Application . Our
           AI-powered platform helps you stand out and land your dream job.
         </p>
         <div className="flex justify-center gap-4 ">
-          <PrimaryButton text="Build Your Resume Now"></PrimaryButton>
-          <SecondaryButton text="Upload Your Existing Resume"></SecondaryButton>
+          <ButonLinkSecondary
+            text="Build Your Resume Now"
+            href="/create-resume"
+            class="hover:bg-CareerCraftPrimaryDark bg-CareerCraftPrimary"
+          ></ButonLinkSecondary>
+          <ButonLinkSecondary
+            text="Upload Your Existing Resume"
+            href="/create-resume"
+            class="hover:bg-CareerCraftPrimaryDark border border-CareerCraftPrimary"
+          ></ButonLinkSecondary>
+
+          {/* <PrimaryButton text="Build Your Resume Now" ></PrimaryButton> */}
+          {/* <SecondaryButton text="Upload Your Existing Resume"></SecondaryButton> */}
         </div>
       </div>
 

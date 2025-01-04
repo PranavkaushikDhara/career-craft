@@ -2,7 +2,12 @@ import { ChatOpenAI } from "@langchain/openai";
 import { StructuredOutputParser } from "langchain/output_parsers";
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 import { z } from "zod";
-
+import React from "react";
+import Input, { TextArea } from "@/components/atoms/Input";
+import PrimaryButton from "@/components/atoms/Button";
+import { ButonLinkSecondary } from "@/components/atoms/ButtonLink";
+import prepareFields from "./action";
+import CreateResumeForm from "@/components/organisms/forms/CreateResume";
 // const schema = z.object({
 //   summary: z.string().optional(),
 //   name: z.string().optional(),
@@ -35,9 +40,17 @@ import { z } from "zod";
 //       skills: z.array(z.string()),
 //     })
 //   ),
+//   projects: z.array(
+//     z.object({
+//       title: z.string().optional(),
+//       description: z.array(z.string()),
+//     })
+//   ),
 // });
+
 // const model = new ChatOpenAI({ model: "gpt-4o-mini" });
 // const parser = StructuredOutputParser.fromZodSchema(schema);
+
 // const system_message =
 //   "Extract the information asked from the given input" +
 //   parser.getFormatInstructions();
@@ -95,15 +108,11 @@ import { z } from "zod";
 // const finalResponse = await parser.parse(jsonString);
 // console.log(jsonString);
 
-import React from "react";
-import { LLM } from "@langchain/core/language_models/llms";
-import { json } from "stream/consumers";
-import ResumeNav from "@/components/organisms/ResumeNav";
-
 const CreateResume = () => {
   return (
-    <div className="flex">
-      <ResumeNav></ResumeNav>
+    <div className="flex flex-col items-center justify-center gap-4 w-full p-6">
+      <h1 className="text-2xl font-bold">Upload or Paste Your Resume</h1>
+      <CreateResumeForm></CreateResumeForm>
     </div>
   );
 };

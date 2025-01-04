@@ -1,12 +1,15 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => {
   return (
-    <div className="flex justify-between items-center border-b border-CareerCraftForeGroundLight px-2">
+    <div className="flex justify-between items-center border-b border-CareerCraftForeGroundLight bg-CareerCraftBackground px-2 sticky top-0">
       <GiHamburgerMenu className="md:hidden text-CareerCraftWhite"></GiHamburgerMenu>
-      <Image alt="logo" src="/logo.png" height={50} width={50}></Image>
+      <Link href="/">
+        <Image alt="logo" src="/logo.png" height={50} width={50}></Image>
+      </Link>
     </div>
   );
 };
