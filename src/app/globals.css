@@ -13,3 +13,13 @@
     --foreground: #ededed;
   }
 }
+
+.collapsible {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.collapsible.open {
+  max-height: 1000px; /* Large enough to handle content */
+}

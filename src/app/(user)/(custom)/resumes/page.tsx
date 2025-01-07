@@ -202,7 +202,7 @@ const createResumeRow = (resume: Resume) => {
       key={resume.id}
       className="text-center text-CareerCraftText text-sm hover:bg-CareerCraftForeGroundLight transition-colors font-light"
     >
-      <td className="flex items-center gap-4 px-4 py-2">
+      <td className="flex items-center gap-4 py-2">
         <div className="flex flex-col text-left">
           <h3 className="font-medium">{resume.role}</h3>
           <p className="text-gray-500 text-xs">{resume.company}</p>
@@ -250,6 +250,7 @@ const ResumeList = () => {
       <div className="flex justify-between items-center">
         <span className="text-xl font-semibold">Resume Management</span>
         <PrimaryButton
+          onClickMethod={() => {}}
           text="Create new resume"
           icon={<FaPlus />}
         ></PrimaryButton>

@@ -14,10 +14,15 @@ const Table: React.FC<Props> = (props: Props) => {
     <div className="overflow-scroll bg-CareerCraftForeGround rounded-lg p-4 shadow-lg w-full h-full">
       <table className="w-full  text-CareerCraftText">
         <thead className="">
-          <tr className="text-left text-CareerCraftText uppercase text-sm ">
-            {props.columns.map((col) => {
+          <tr className=" text-CareerCraftText uppercase text-sm ">
+            {props.columns.map((col, index) => {
               return (
-                <th className={col.classname} key={col.accessor}>
+                <th
+                  className={`${col.classname} ${
+                    index === 0 ? "text-left" : "text-center"
+                  }`}
+                  key={col.accessor}
+                >
                   {col.header}
                 </th>
               );

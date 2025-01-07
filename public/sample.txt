@@ -1,0 +1,39 @@
+Pranav Kaushik Dhara
+(312) 477-6452 | pranavkaushik300@gmail.com | LinkedIn | GitHub | Portfolio
+Education
+Masters in Computer Science, GPA: 3.9
+Illinois Institute of Technology
+Work Experience
+Graduate Developer
+Illinois Institute of Technology
+    • Migrated the college website to Next.js, enhancing scalability and user experience through modular and efficient code.
+• Developed an AI chatbot using LangChain, OpenAI, and Elasticsearch, achieving an 85% response accuracy in handling queries about student records with an algorithmic approach to data processing.
+Software Engineer 2 December 2021 – December 2022 NCR Atleos Hyderabad, IN
+• Developed both front and back-end modules of ATM and POS software using React, JavaScript, Java Spring Boot, and Oracle DB, ensuring high-quality and scalable code suitable for domain-specific products.
+• Implemented Kafka as a message broker for an ATM switch, enabling real-time, reliable messaging and transaction processing for financial services aligned with an event-driven architecture.
+• Achieved over 80% reduction in software backlog defects through proactive troubleshooting and development of internal tools, improving operational excellence and service reliability.
+• Led application testing using JUnit and Mockito, writing comprehensive test cases that achieved 99% test coverage for the entire application, contributing to the development, testing, and maintenance phases and ensuring robust CI/CD processes.
+Software Engineer 1 October 2020 – December 2021
+NCR Atleos
+Hyderabad, IN
+• Developed low-latency REST APIs in Java (Spring Boot) handling 100k+ daily requests.
+• Leveraged Agile practices and automated CI/CD pipelines with Jenkins to achieve a 15% faster software
+delivery cycle. This also led to a 20% reduction in deployment errors.
+• Enhanced security with JWT authentication, cutting unauthorized access by 70%.
+Certifications
+AWS Certified Solutions Architect – Associate
+Issued: October 2024
+AWS Certified Cloud Practitioner
+Issued: February 2024
+Skills
+Chicago, USA
+August 2023 – Present
+Chicago, USA
+  Amazon Web Services
+Valid Until: October 2027
+Amazon Web Services
+Valid Until: February 2027
+ Cloud Platforms: AWS (Lambda, S3, EC2, ALB), Google Cloud Platform, Azure, Git, Jenkins, Docker, Kubernetes
+Languages: Java, JavaScript, C/C++, Python, C#
+Frameworks & Libraries: ReactJS, Angular 8, NodeJS, Spring Boot, Spring DI, Spring MVC Databases: MySQL, Oracle, MongoDB, PostgreSQL, EdgeDB, Hibernate, JDBC, GraphDB, NoSQL Methodologies: Agile, Object-Oriented Design Patterns, Data Structures & Algorithms
+Additional Skills: Gradle, Maven, Cloud agnostic services, Cloud native services, CI/CD, RESTful HTTP Services, Innovative Mindset.

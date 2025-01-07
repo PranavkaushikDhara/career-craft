@@ -1,37 +1,134 @@
+"use client";
+
+import { storeContactDetails } from "@/app/(user)/(builder)/contact/action";
+import { FormSubmitButton } from "@/components/atoms/Button";
 import { ButonLinkSecondary } from "@/components/atoms/ButtonLink";
 import Input from "@/components/atoms/Input";
-import React from "react";
+import React, { useActionState, useEffect, useState } from "react";
+import { useFormStatus } from "react-dom";
+import useResumeStore from "@/store/ResumeStore";
+import { redirect } from "next/dist/server/api-utils";
+import { useRouter } from "next/navigation";
+import { set } from "zod";
 
-const ContactForm = () => {
+const ContactForm: React.FC = () => {
+  const [state, formAction] = useActionState(storeContactDetails, undefined);
+  const { pending } = useFormStatus();
+  const [submitted, setSubmitted] = useState(false);
+  const [resumeData, setResumeData] = useState<any>(null);
+  const router = useRouter();
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+
+    const updateContactDetails = useResumeStore.getState().addContact;
+    const addFirstName = useResumeStore.getState().addFirstName;
+    const addLastName = useResumeStore.getState().addLastName;
+    const addAddress = useResumeStore.getState().addAddress;
+
+    const contactDetails = {
+      email: formData.get("email") as string,
+      phone: formData.get("phone") as string,
+      linkedin: formData.get("linkedin") as string,
+      github: formData.get("github") as string,
+    };
+
+    updateContactDetails(contactDetails);
+    addFirstName(formData.get("firstname") as string);
+    addLastName(formData.get("lastname") as string);
+    addAddress({
+      city: formData.get("city") as string,
+      state: formData.get("state") as string,
+      country: formData.get("country") as string,
+    });
+
+    console.log(useResumeStore.getState());
+    setSubmitted(true);
+    router.push("/experience"); // Redirect after form submission
+  };
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("resumeData");
+    if (storedData) {
+      try {
+        setResumeData(JSON.parse(storedData));
+      } catch (error) {
+        console.error(
+          "Failed to parse resume data from sessionStorage:",
+          error
+        );
+        localStorage.removeItem("resumeData");
+      }
+    }
+  }, []);
+
   return (
-    <div className="flex flex-col gap-4 bg-CareerCraftForeGround p-4 rounded-lg shadow-lg">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-4 bg-CareerCraftForeGround p-4 rounded-lg shadow-lg"
+    >
       <div className="flex gap-4 ">
         <div className="flex flex-col gap-2 w-full">
           <label
             className="text-CareerCraftWhite text-sm font-medium"
-            htmlFor="firstName"
+            htmlFor="firstname"
           >
             First Name
           </label>
           <Input
+            required={true}
             className="rounded-md"
             placeholder="Enter your first name"
-            name="firstName"
-            //   className="w-full"
+            name="firstname"
+            value={resumeData?.firstname || ""}
           />
         </div>
         <div className="flex flex-col gap-2 w-full">
           <label
             className="text-CareerCraftWhite text-sm font-medium"
-            htmlFor="lastName"
+            htmlFor="lastname"
           >
             Last Name
           </label>
           <Input
+            required={true}
             className="rounded-md"
             placeholder="Enter your last name"
-            name="lastName"
-            //   className="w-full"
+            name="lastname"
+            value={resumeData?.lastname || ""}
+          />
+        </div>
+      </div>
+
+      <div className="flex gap-4 ">
+        <div className="flex flex-col gap-2 w-full">
+          <label
+            className="text-CareerCraftWhite text-sm font-medium"
+            htmlFor="github"
+          >
+            GitHub URL
+          </label>
+          <Input
+            required={false}
+            className="rounded-md"
+            placeholder="Enter your GitHub URL"
+            name="github"
+            value={resumeData?.contactDetails.github || ""}
+          />
+        </div>
+        <div className="flex flex-col gap-2 w-full">
+          <label
+            className="text-CareerCraftWhite text-sm font-medium"
+            htmlFor="linkedin"
+          >
+            Linkedin URL
+          </label>
+          <Input
+            required={false}
+            className="rounded-md"
+            placeholder="Enter your Linkedin URL"
+            name="linkedin"
+            value={resumeData?.contactDetails.linkedin || ""}
           />
         </div>
       </div>
@@ -44,7 +141,13 @@ const ContactForm = () => {
           >
             City
           </label>
-          <Input className="rounded-md" placeholder="City" name="city" />
+          <Input
+            required={true}
+            className="rounded-md"
+            placeholder="City"
+            name="city"
+            value={resumeData?.address.city || ""}
+          />
         </div>
         <div className="flex flex-col gap-2 w-full">
           <label
@@ -54,23 +157,26 @@ const ContactForm = () => {
             State
           </label>
           <Input
+            required={true}
             className="rounded-md"
             placeholder="State/Province"
+            value={resumeData?.address.state || ""}
             name="state"
           />
         </div>
         <div className="flex flex-col gap-2 w-full">
           <label
             className="text-CareerCraftWhite text-sm font-medium"
-            htmlFor="zipcode"
+            htmlFor="country"
           >
-            Zip Code
+            Country
           </label>
           <Input
-            placeholder="Zip Code"
-            name="zipcode"
+            required={true}
+            placeholder="Country"
+            name="country"
+            value={resumeData?.address.country || ""}
             className="rounded-md"
-            //   className="w-full"
           />
         </div>
       </div>
@@ -85,9 +191,10 @@ const ContactForm = () => {
           </label>
           <Input
             placeholder="Phone"
+            required={true}
             name="phone"
+            value={resumeData?.contactDetails.phone || ""}
             className="rounded-md"
-            //   className="w-full"
           />
         </div>
         <div className="flex flex-col gap-2 w-full">
@@ -99,22 +206,24 @@ const ContactForm = () => {
           </label>
           <Input
             placeholder="Email"
+            required={true}
             name="email"
             className="rounded-md"
-            //   className="w-full"
+            value={resumeData?.contactDetails.email || ""}
+            type="email"
           />
         </div>
       </div>
 
       {/* Submit Button */}
       <div className="flex justify-center">
-        <ButonLinkSecondary
-          text="Save & Continue"
-          class="bg-CareerCraftPrimary hover:bg-CareerCraftPrimaryDark text-CareerCraftWhite"
-          href="/experience"
-        ></ButonLinkSecondary>
+        <FormSubmitButton
+          buttonText="Save & Continue"
+          pendingText="Saving contact details..."
+          type="submit"
+        ></FormSubmitButton>
       </div>
-    </div>
+    </form>
   );
 };
 
