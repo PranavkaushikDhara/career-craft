@@ -1,10 +1,9 @@
 "use server";
+
 import { ChatOpenAI } from "@langchain/openai";
 import { StructuredOutputParser } from "langchain/output_parsers";
-import { redirect } from "next/navigation";
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 import { z } from "zod";
-import useResumeStore from "@/store/ResumeStore";
 
 require("dotenv").config();
 const schema = z.object({
@@ -68,15 +67,17 @@ const schema = z.object({
 });
 const parser = StructuredOutputParser.fromZodSchema(schema);
 // Prevent default form submission behavior
+const system_message =
+  "Extract the information asked from the given input. For any date, return mm-dd-yyyy format " +
+  parser.getFormatInstructions();
 
+console.log(system_message);
+console.log("Starting OpenAI model...");
 const model = new ChatOpenAI({
   model: "gpt-4o-mini",
   apiKey:
     "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",
 });
-const system_message =
-  "Extract the information asked from the given input. For any date, return mm-dd-yyyy format" +
-  parser.getFormatInstructions();
 
 const prepareFields = async (state: any, formData: FormData) => {
   const resumeData = String(formData.get("resume") || "");

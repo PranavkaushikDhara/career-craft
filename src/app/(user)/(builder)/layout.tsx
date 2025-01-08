@@ -9,13 +9,13 @@ interface Props {
 
 const BuilderLayout: React.FC<Props> = ({ children }) => {
   return (
-    <div className="flex flex-col gap-2 sticky top-0 text-CareerCraftWhite">
+    <div className="flex flex-col h-screen w-screen gap-2 text-CareerCraftWhite">
       <Navbar />
-      <div className="w-screen flex min-h-screen gap-4 ">
+      <div className="flex gap-4 flex-1">
         <aside className="hidden md:block">
           <ResumeNav />
         </aside>
-        <main className="w-full h-screen">{children}</main>
+        <main className="w-full">{children}</main>
       </div>
     </div>
   );

@@ -2,20 +2,21 @@
 
 import { storeContactDetails } from "@/app/(user)/(builder)/contact/action";
 import { FormSubmitButton } from "@/components/atoms/Button";
-import { ButonLinkSecondary } from "@/components/atoms/ButtonLink";
 import Input from "@/components/atoms/Input";
 import React, { useActionState, useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
-import useResumeStore from "@/store/ResumeStore";
-import { redirect } from "next/dist/server/api-utils";
+import useResumeStore, { ResumeStore } from "@/store/ResumeStore";
 import { useRouter } from "next/navigation";
-import { set } from "zod";
 
-const ContactForm: React.FC = () => {
+interface ContactFormProps {
+  resumeData?: ResumeStore;
+}
+
+const ContactForm: React.FC<ContactFormProps> = (props: ContactFormProps) => {
   const [state, formAction] = useActionState(storeContactDetails, undefined);
   const { pending } = useFormStatus();
   const [submitted, setSubmitted] = useState(false);
-  const [resumeData, setResumeData] = useState<any>(null);
+
   const router = useRouter();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -44,31 +45,16 @@ const ContactForm: React.FC = () => {
 
     console.log(useResumeStore.getState());
     setSubmitted(true);
-    router.push("/experience"); // Redirect after form submission
+    router.push("/experience");
   };
-
-  useEffect(() => {
-    const storedData = localStorage.getItem("resumeData");
-    if (storedData) {
-      try {
-        setResumeData(JSON.parse(storedData));
-      } catch (error) {
-        console.error(
-          "Failed to parse resume data from sessionStorage:",
-          error
-        );
-        localStorage.removeItem("resumeData");
-      }
-    }
-  }, []);
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-4 bg-CareerCraftForeGround p-4 rounded-lg shadow-lg"
+      className="flex flex-col gap-4 bg-CareerCraftForeGround p-4 rounded-lg shadow-lg w-full items-center"
     >
-      <div className="flex gap-4 ">
-        <div className="flex flex-col gap-2 w-full">
+      <div className="flex gap-4 flex-wrap w-full">
+        <div className="flex flex-col gap-2 flex-1">
           <label
             className="text-CareerCraftWhite text-sm font-medium"
             htmlFor="firstname"
@@ -80,10 +66,10 @@ const ContactForm: React.FC = () => {
             className="rounded-md"
             placeholder="Enter your first name"
             name="firstname"
-            value={resumeData?.firstname || ""}
+            value={props.resumeData?.firstname || ""}
           />
         </div>
-        <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-col gap-2 flex-1">
           <label
             className="text-CareerCraftWhite text-sm font-medium"
             htmlFor="lastname"
@@ -95,13 +81,13 @@ const ContactForm: React.FC = () => {
             className="rounded-md"
             placeholder="Enter your last name"
             name="lastname"
-            value={resumeData?.lastname || ""}
+            value={props.resumeData?.lastname || ""}
           />
         </div>
       </div>
 
-      <div className="flex gap-4 ">
-        <div className="flex flex-col gap-2 w-full">
+      <div className="flex gap-4 flex-wrap w-full">
+        <div className="flex flex-col gap-2 flex-1">
           <label
             className="text-CareerCraftWhite text-sm font-medium"
             htmlFor="github"
@@ -113,10 +99,10 @@ const ContactForm: React.FC = () => {
             className="rounded-md"
             placeholder="Enter your GitHub URL"
             name="github"
-            value={resumeData?.contactDetails.github || ""}
+            value={props.resumeData?.contactDetails.github || ""}
           />
         </div>
-        <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-col gap-2 flex-1">
           <label
             className="text-CareerCraftWhite text-sm font-medium"
             htmlFor="linkedin"
@@ -128,13 +114,13 @@ const ContactForm: React.FC = () => {
             className="rounded-md"
             placeholder="Enter your Linkedin URL"
             name="linkedin"
-            value={resumeData?.contactDetails.linkedin || ""}
+            value={props.resumeData?.contactDetails.linkedin || ""}
           />
         </div>
       </div>
 
-      <div className="md:flex-row flex flex-col gap-4 ">
-        <div className="flex flex-col gap-2 w-full">
+      <div className=" flex gap-4 flex-wrap w-full">
+        <div className="flex flex-col gap-2 flex-1">
           <label
             className="text-CareerCraftWhite text-sm font-medium"
             htmlFor="city"
@@ -146,10 +132,10 @@ const ContactForm: React.FC = () => {
             className="rounded-md"
             placeholder="City"
             name="city"
-            value={resumeData?.address.city || ""}
+            value={props.resumeData?.address.city || ""}
           />
         </div>
-        <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-col gap-2 flex-1">
           <label
             className="text-CareerCraftWhite text-sm font-medium"
             htmlFor="state"
@@ -160,11 +146,11 @@ const ContactForm: React.FC = () => {
             required={true}
             className="rounded-md"
             placeholder="State/Province"
-            value={resumeData?.address.state || ""}
+            value={props.resumeData?.address.state || ""}
             name="state"
           />
         </div>
-        <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-col gap-2 flex-1">
           <label
             className="text-CareerCraftWhite text-sm font-medium"
             htmlFor="country"
@@ -175,14 +161,14 @@ const ContactForm: React.FC = () => {
             required={true}
             placeholder="Country"
             name="country"
-            value={resumeData?.address.country || ""}
+            value={props.resumeData?.address.country || ""}
             className="rounded-md"
           />
         </div>
       </div>
 
-      <div className="flex gap-4 ">
-        <div className="flex flex-col gap-2 w-full">
+      <div className="flex gap-4 flex-wrap w-full">
+        <div className="flex flex-col gap-2 flex-1">
           <label
             className="text-CareerCraftWhite text-sm font-medium"
             htmlFor="phone"
@@ -193,11 +179,11 @@ const ContactForm: React.FC = () => {
             placeholder="Phone"
             required={true}
             name="phone"
-            value={resumeData?.contactDetails.phone || ""}
+            value={props.resumeData?.contactDetails.phone || ""}
             className="rounded-md"
           />
         </div>
-        <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-col gap-2 flex-1">
           <label
             className="text-CareerCraftWhite text-sm font-medium"
             htmlFor="email"
@@ -209,7 +195,7 @@ const ContactForm: React.FC = () => {
             required={true}
             name="email"
             className="rounded-md"
-            value={resumeData?.contactDetails.email || ""}
+            value={props.resumeData?.contactDetails.email || ""}
             type="email"
           />
         </div>

@@ -6,6 +6,7 @@ import clsx from "clsx";
 interface ButtonProps {
   text: string;
   icon?: any;
+  type?: "button" | "submit" | "reset";
   className?: string;
   onClickMethod: () => void;
 }
@@ -21,6 +22,7 @@ export const SecondaryButton = (props: ButtonProps) => {
   return (
     <button
       onClick={props.onClickMethod}
+      type={props.type}
       className={clsx(
         "flex gap-1 rounded-md py-2 px-2 border items-center text-sm",
         props.className
