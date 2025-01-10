@@ -46,7 +46,10 @@ export const FormSubmitButton = (props: FormButtonProps) => {
     <div className="flex flex-col gap-3">
       <button
         type={props.type}
-        className="text-CareerCraftWhite rounded-md bg-CareerCraftPrimary py-2 px-2 text-sm hover:bg-CareerCraftPrimaryDark flex items-center gap-2"
+        className={clsx(
+          "flex gap-1 rounded-md py-2 px-2 border items-center text-sm",
+          props.className
+        )}
       >
         {props.icon}
         {pending ? props.pendingText : props.buttonText}

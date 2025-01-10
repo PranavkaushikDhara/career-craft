@@ -10,7 +10,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-CareerCraftBackground">{children}</body>
+      <body className="bg-CareerCraftBackground bg-gradient-to-r from-CareerCraftBackground to-CareerCraftPrimaryDark/40">
+        {children}
+      </body>
     </html>
   );
 }

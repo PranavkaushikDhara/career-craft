@@ -49,19 +49,19 @@ const schema = z.object({
       city: z.string().optional().nullable(),
       state: z.string().optional().nullable(),
       country: z.string().optional().nullable(),
-      tasks: z.array(z.string()).optional().nullable(),
+      responsibilities: z.array(z.string()),
     })
   ),
   skills: z.array(
     z.object({
       title: z.string().optional().nullable(),
-      skills: z.array(z.string()).nullable(),
+      skills: z.array(z.string()),
     })
   ),
   projects: z.array(
     z.object({
       title: z.string().optional().nullable(),
-      description: z.array(z.string()).nullable(),
+      description: z.array(z.string()),
     })
   ),
 });
@@ -75,8 +75,6 @@ console.log(system_message);
 console.log("Starting OpenAI model...");
 const model = new ChatOpenAI({
   model: "gpt-4o-mini",
-  apiKey:
-    "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",
 });
 
 const prepareFields = async (state: any, formData: FormData) => {

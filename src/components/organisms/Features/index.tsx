@@ -6,31 +6,42 @@ import { IoMdMail } from "react-icons/io";
 import { HiSpeakerphone } from "react-icons/hi";
 const Features = () => {
   return (
-    <div className="flex flex-col bg-CareerCraftForeGround p-4 gap-2 items-center">
-      <span className="text-lg font-bold text-CareerCraftWhite">
-        Everything you want to create a perfect application
-      </span>
-      <div className="w-full  flex flex-col md:flex-row gap-4 flex-wrap  md:justify-center">
-        <Card
-          icon={<IoDocumentTextOutline />}
-          title="Resume Customization"
-          text="Tailor your resume automatically for each job application"
-        ></Card>
-        <Card
-          icon={<FaLinkedin></FaLinkedin>}
-          title="Linkedin Optimization"
-          text="Enhance your profile to attract recruiters"
-        ></Card>
-        <Card
-          icon={<IoMdMail></IoMdMail>}
-          title="Email Writer"
-          text="Generate Professional emails for job applications"
-        ></Card>
-        <Card
-          icon={<HiSpeakerphone></HiSpeakerphone>}
-          title="Pitch Generator"
-          text="Create compelling elevator pitches instantly"
-        ></Card>
+    <div className="flex flex-col px-8 py-12">
+      <div className="flex flex-col gap-4  max-w-7xl mx-auto w-full">
+        <h2 className="text-5xl font-bold text-CareerCraftWhite text-center">
+          Everything you want to create a perfect application
+        </h2>
+        <div className="flex flex-wrap justify-center gap-4">
+          {[
+            {
+              icon: <IoDocumentTextOutline className="text-2xl" />,
+              title: "Resume Customization",
+              text: "Tailor your resume automatically for each job application",
+            },
+            {
+              icon: <IoDocumentTextOutline className="text-2xl" />,
+              title: "Linkedin Optimization",
+              text: "Enhance your profile to attract recruiters",
+            },
+            {
+              icon: <IoMdMail className="text-2xl" />,
+              title: "Email Writer",
+              text: "Generate Professional emails for job applications",
+            },
+            {
+              icon: <HiSpeakerphone className="text-2xl" />,
+              title: "Pitch Generator",
+              text: "Create compelling elevator pitches instantly",
+            },
+          ].map((card) => (
+            <div
+              className="flex-1 min-w-[280px] max-w-[320px]"
+              key={card.title}
+            >
+              <Card icon={card.icon} title={card.title} text={card.text} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

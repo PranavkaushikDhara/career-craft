@@ -1,13 +1,15 @@
+"use client";
 import PrimaryButton from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 import { TiTickOutline } from "react-icons/ti";
 
 const Register = () => {
   return (
     <div className="flex items-center justify-center w-full md:flex-1">
-      <div className="flex flex-col  gap-6 bg-CareerCraftForeGround p-8 rounded-lg shadow-lg w-full max-w-sm">
+      <div className="flex flex-col gap-4 bg-gradient-to-l from-CareerCraftBackground to-CareerCraftPrimary/40 bg-CareerCraftBackground p-8 rounded-lg shadow-lg w-full">
         <div className="flex flex-col gap-2 items-center">
           <span className="text-CareerCraftWhite font-bold text-2xl">
             Create Account
@@ -25,6 +27,8 @@ const Register = () => {
             Full Name
           </label>
           <Input
+            required={true}
+            className="rounded-md text-CareerCraftInputText"
             placeholder="Enter your full name"
             name="name"
             //   className="w-full"
@@ -38,6 +42,8 @@ const Register = () => {
             Email Address
           </label>
           <Input
+            className="rounded-md text-CareerCraftInputText"
+            required={true}
             placeholder="Enter your email"
             name="email"
             //   className="w-full"
@@ -52,6 +58,8 @@ const Register = () => {
             Password
           </label>
           <Input
+            required={true}
+            className="rounded-md text-CareerCraftInputText"
             placeholder="Enter your password"
             type="password"
             name="password"
@@ -66,6 +74,8 @@ const Register = () => {
             Confirm Password
           </label>
           <Input
+            required={true}
+            className="rounded-md text-CareerCraftInputText"
             placeholder="Confirm your password"
             name="confirm-password"
             type="password"
@@ -76,7 +86,12 @@ const Register = () => {
           <span>I agree to the Terms of Service and Privacy Policy</span>
         </span>
         {/* Submit Button */}
-        <PrimaryButton text="Sign Up"></PrimaryButton>
+        <div className="flex justify-center">
+          <PrimaryButton
+            onClickMethod={() => redirect("/sign-in")}
+            text="Sign Up"
+          ></PrimaryButton>
+        </div>
         <span className="text-CareerCraftText text-sm gap-1 flex justify-center">
           Already have an account?
           <Link className="text-CareerCraftPrimary" href="/sign-in">

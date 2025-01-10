@@ -23,7 +23,7 @@ const ResumeNav = () => {
   const pathname = usePathname();
   console.log(pathname);
   return (
-    <div className="hidden md:flex md:flex-col md:w-[200px] md:h-full justify-between border-r border-CareerCraftForeGroundLight">
+    <div className="hidden md:flex md:flex-col md:w-[200px] md:h-full justify-between border-r border-black">
       <div className="flex flex-col gap-2 h-full">
         {topElements.map((element) => (
           <ButtonLink

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Table from "@/components/organisms/Table";
 import clsx from "clsx";

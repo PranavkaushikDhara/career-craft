@@ -1,125 +1,134 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
+
 export interface ContactDetails {
   phone: string;
   email: string;
-  linkedin?: string;
-  github?: string;
+  linkedin: string;
+  github: string;
 }
 
-export interface Certification {
+export interface Address {
+  city: string;
+  state: string;
+  country: string;
+}
+
+export interface Work {
   title: string;
-  authority: string;
-  validFrom?: string;
-  validTill?: string;
-  licenseNumber?: string;
+  company: string;
+  city: string;
+  state: string;
+  country: string;
+  startDate: string;
+  endDate: string;
+  responsibilities: string[];
+  currentJob: boolean;
+  responsibilityIds: string[];
 }
 
 export interface Education {
   college: string;
   degree: string;
+  fieldOfStudy: string;
   startDate: string;
   endDate: string;
-  collegeAddress?: string;
-  fieldOfStudy?: string;
-}
-export interface Work {
-  title: string;
-  company: string;
-  city?: string;
-  state?: string;
-  country?: string;
-  startDate: string;
-  endDate: string;
-  tasks: string[];
+  city: string;
+  state: string;
+  country: string;
+  currentEducation?: boolean;
 }
 
 export interface Skill {
-  title: string;
+  name: string;
   skills: string[];
 }
 
 export interface Project {
   title: string;
   description: string[];
+  technologies: string[];
+  link?: string;
 }
 
-export interface Address {
-  city?: string;
-  state?: string;
-  country?: string;
+export interface Certification {
+  title: string;
+  authority: string;
+  validFrom: string;
+  validTill: string;
+  licenseNumber: string;
+  noExpiry: boolean;
 }
 
 export interface ResumeStore {
+  summary: string;
   firstname: string;
   lastname: string;
   address: Address;
-  summary: string;
   contactDetails: ContactDetails;
   educationDetails: Education[];
-  certifications: Certification[];
   workExperience: Work[];
   skills: Skill[];
   projects: Project[];
-  addFirstName: (newFirstName: string) => void;
-  addLastName: (newLastName: string) => void;
-  addSummary: (newSummary: string) => void;
-  addContact: (newContactDetails: ContactDetails) => void;
+  certifications: Certification[];
+
+  // Actions
+  addSummary: (summary: string) => void;
+  addFirstName: (firstname: string) => void;
+  addLastName: (lastname: string) => void;
+  addContact: (contactDetails: ContactDetails) => void;
   addEducation: (educationDetails: Education[]) => void;
   addWorkExperience: (workExperience: Work[]) => void;
   addSkill: (skills: Skill[]) => void;
   addProject: (projects: Project[]) => void;
   addAddress: (address: Address) => void;
+  addCertification: (certifications: Certification[]) => void;
 }
 
-const useResumeStore = create<ResumeStore>((set) => ({
-  summary: "",
-  firstname: "",
-  address: {
-    city: "",
-    state: "",
-    country: "",
-  },
-  lastname: "",
-  contactDetails: {
-    phone: "",
-    email: "",
-    linkedin: "",
-    github: "",
-  },
-  certifications: [],
-  educationDetails: [],
-  workExperience: [],
-  skills: [],
-  projects: [],
-  addSummary: (newSummary: string) =>
-    set((state) => ({ ...state, summary: newSummary })),
-  addFirstName: (newFirstName: string) =>
-    set((state) => ({ ...state, firstname: newFirstName })),
-  addLastName: (newLastName: string) =>
-    set((state) => ({ ...state, lastname: newLastName })),
-  addContact: (contactDetails: ContactDetails) =>
-    set((state) => ({ ...state, contactDetails: contactDetails })),
-  addEducation: (educationDetails: Education[]) =>
-    set((state) => ({
-      ...state,
-      educationDetails: educationDetails,
-    })),
-  addWorkExperience: (workExperience: Work[]) =>
-    set((state) => ({
-      ...state,
-      workExperience: workExperience,
-    })),
-  addSkill: (skills: Skill[]) =>
-    set((state) => ({
-      ...state,
-      skills: skills,
-    })),
-  addProject: (projects: Project[]) =>
-    set((state) => ({
-      ...state,
-      projects: projects,
-    })),
-  addAddress: (newAddress: Address) =>
-    set((state) => ({ ...state, address: newAddress })),
-}));
+const useResumeStore = create<ResumeStore>()(
+  persist(
+    (set, get) => ({
+      summary: "",
+      firstname: "",
+      lastname: "",
+      address: {
+        city: "",
+        state: "",
+        country: "",
+      },
+      contactDetails: {
+        phone: "",
+        email: "",
+        linkedin: "",
+        github: "",
+      },
+      certifications: [],
+      educationDetails: [],
+      workExperience: [],
+      skills: [],
+      projects: [],
+
+      // Actions
+      addSummary: (newSummary) => set({ summary: newSummary }),
+      addFirstName: (newFirstName) => set({ firstname: newFirstName }),
+      addLastName: (newLastName) => set({ lastname: newLastName }),
+      addContact: (newContactDetails) =>
+        set({ contactDetails: newContactDetails }),
+      addEducation: (newEducationDetails) =>
+        set({ educationDetails: newEducationDetails }),
+      addWorkExperience: (newWorkExperience) =>
+        set({ workExperience: newWorkExperience }),
+      addSkill: (newSkills) => set({ skills: newSkills }),
+      addProject: (newProjects) => set({ projects: newProjects }),
+      addAddress: (newAddress) => set({ address: newAddress }),
+      addCertification(certifications) {
+        set({ certifications });
+      },
+    }),
+    {
+      name: "resume-storage",
+    }
+  )
+);
+
 export default useResumeStore;

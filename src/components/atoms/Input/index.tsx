@@ -8,17 +8,20 @@ interface InputProps {
   type?: string;
   className?: string;
   required: boolean;
+  disabled?: boolean;
   value?: string;
+  label?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 const Input = (props: InputProps) => {
   return (
     <input
       className={clsx(
-        "bg-CareerCraftForeGroundLight text-CareerCraftText p-2 text-sm outline-none focus:ring-2 focus:ring-CareerCraftPrimary",
+        "bg-CareerCraftBackground text-CareerCraftText p-2 text-sm outline-none focus:ring-2 focus:ring-CareerCraftPrimary [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:hover:opacity-70",
         props.className
       )}
-      required
+      required={props.required}
+      disabled={props.disabled}
       name={props.name}
       onChange={props.onChange}
       defaultValue={props.value}
@@ -32,10 +35,11 @@ export const TextArea = (props: InputProps) => {
   return (
     <textarea
       className={clsx(
-        "w-full p-2 rounded-md shadow-sm text-sm bg-CareerCraftForeGroundLight focus:ring-2 focus:ring-CareerCraftPrimary outline-none",
+        "w-full p-2 rounded-md shadow-sm text-sm bg-CareerCraftBackground focus:ring-2 focus:ring-CareerCraftPrimary outline-none",
         props.className
       )}
       name={props.name}
+      defaultValue={props.value}
       placeholder={props.placeholder}
     />
   );

@@ -6,11 +6,11 @@ const testimonials = [
     photo: (
       <img
         src="/person1.jpg"
-        alt="John Doe"
+        alt="Pranav Kaushik"
         className="w-12 h-12 rounded-full"
       />
     ),
-    name: "John Doe",
+    name: "Pranav Kaushik",
     title: "CEO, TechCorp",
     testimonal:
       "This platform transformed my resume and helped me land my dream job in less than two weeks. Highly recommend it!",
@@ -19,11 +19,11 @@ const testimonials = [
     photo: (
       <img
         src="/person2.jpg"
-        alt="Jane Smith"
+        alt="Rajesh Kumar"
         className="w-12 h-12 rounded-full"
       />
     ),
-    name: "Jane Smith",
+    name: "Rajesh Kumar",
     title: "Senior Developer, DevCompany",
     testimonal:
       "Thanks to this tool, my LinkedIn profile now attracts recruiters effortlessly. It's a game-changer!",
@@ -32,11 +32,11 @@ const testimonials = [
     photo: (
       <img
         src="/person3.jpg"
-        alt="Alice Johnson"
+        alt="Chandra Sekhar"
         className="w-12 h-12 rounded-full"
       />
     ),
-    name: "Alice Johnson",
+    name: "Chandra Sekhar",
     title: "Product Manager, Innovate Inc.",
     testimonal:
       "Writing emails used to be a hassle, but this tool makes it so easy and professional. Love it!",
@@ -45,11 +45,11 @@ const testimonials = [
     photo: (
       <img
         src="/person4.jpg"
-        alt="Michael Brown"
+        alt="Kalpana"
         className="w-12 h-12 rounded-full"
       />
     ),
-    name: "Michael Brown",
+    name: "Kalpana",
     title: "Data Scientist, Analytics Hub",
     testimonal:
       "The pitch generator is a lifesaver. I aced my interviews and impressed everyone with my elevator pitch.",
@@ -58,25 +58,29 @@ const testimonials = [
 
 const Testimonals = () => {
   return (
-    <div className="flex flex-col p-4 gap-2 items-center">
-      <span className="text-lg font-bold text-CareerCraftWhite">
-        Success Stories
-      </span>
-      <span className=" text-sm text-CareerCraftText">
-        See how others transformed their career with our platform
-      </span>
-      <div className="w-full  flex flex-col md:flex-row gap-4 flex-wrap p-4 md:justify-center">
-        {testimonials.map((testimonal) => {
-          return (
-            <TestimonalCard
-              name={testimonal.name}
-              key={testimonal.name}
-              title={testimonal.title}
-              photo={testimonal.photo}
-              testimonal={testimonal.testimonal}
-            ></TestimonalCard>
-          );
-        })}
+    <div className="flex flex-col px-8 py-12 ">
+      <div className="max-w-7xl mx-auto w-full flex flex-col gap-4">
+        <div className="flex flex-col items-center gap-2  ">
+          <h2 className="text-3xl font-bold text-CareerCraftWhite text-center">
+            Success Stories
+          </h2>
+          <p className="text-lg text-CareerCraftText text-center">
+            See how others transformed their career with our platform
+          </p>
+        </div>
+        <div className="flex flex-wrap justify-center gap-4">
+          {testimonials.map((testimonal) => (
+            <div className="flex-1 min-w-[280px] max-w-[320px]">
+              <TestimonalCard
+                name={testimonal.name}
+                key={testimonal.name}
+                title={testimonal.title}
+                photo={testimonal.photo}
+                testimonal={testimonal.testimonal}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

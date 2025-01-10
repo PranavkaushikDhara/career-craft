@@ -1,13 +1,15 @@
+"use client";
 import PrimaryButton from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 import { TiTickOutline } from "react-icons/ti";
 
 const Register = () => {
   return (
     <div className="flex items-center justify-center w-full md:flex-1">
-      <div className="flex flex-col gap-6 bg-CareerCraftForeGround p-8 rounded-lg shadow-lg w-full max-w-sm">
+      <div className="flex flex-col gap-4 bg-gradient-to-l from-CareerCraftBackground to-CareerCraftPrimary/40 bg-CareerCraftBackground p-8 rounded-lg shadow-lg w-full">
         <div className="flex flex-col gap-2 items-center">
           <h2 className="text-CareerCraftWhite font-bold text-2xl">
             Welcome Back
@@ -22,6 +24,8 @@ const Register = () => {
             Email Address
           </label>
           <Input
+            className="rounded-md text-CareerCraftInputText"
+            required={true}
             placeholder="Enter your email"
             name="email"
             //   className="w-full"
@@ -35,10 +39,19 @@ const Register = () => {
           >
             Password
           </label>
-          <Input placeholder="Enter your password" name="password" />
+          <Input
+            className="rounded-md text-CareerCraftInputText"
+            placeholder="Enter your password"
+            name="password"
+            required={true}
+          />
         </div>
-        {/* Submit Button */}
-        <PrimaryButton text="Log In"></PrimaryButton>
+        <div className="flex justify-center">
+          <PrimaryButton
+            onClickMethod={() => redirect("/")}
+            text="Login"
+          ></PrimaryButton>
+        </div>
         <span className="text-CareerCraftText text-sm gap-1 flex justify-center">
           Don't have an account?
           <Link className="text-CareerCraftPrimary" href="/register">

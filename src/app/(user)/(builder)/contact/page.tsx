@@ -1,13 +1,19 @@
 "use client";
 import ContactForm from "@/components/organisms/forms/Contact";
-import useResumeStore from "@/store/ResumeStore";
-import React, { use, useEffect, useState } from "react";
+import useResumeStore, {
+  Address,
+  ContactDetails,
+  ResumeStore,
+} from "@/store/ResumeStore";
+import React, { useEffect, useState } from "react";
 
 const Contact: React.FC = () => {
   const [resumeData, setResumeData] = useState<any>(null);
+  const contactDetails: ContactDetails =
+    useResumeStore.getState().contactDetails;
+
   useEffect(() => {
     const storedData = localStorage.getItem("resumeData");
-
     if (storedData) {
       try {
         setResumeData(JSON.parse(storedData));
@@ -24,16 +30,22 @@ const Contact: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-6  p-2 h-full w-full">
-      <span className="text-CareerCraftWhite flex flex-col gap-2 items-start w-full">
-        <p className="text-2xl font-bold">Contact</p>
-        <p className="text-sm">
+    <div className="flex flex-col gap-4 max-w-7xl mx-auto p-8">
+      <header className="flex flex-col gap-2">
+        <h1 className="text-3xl font-bold text-CareerCraftWhite">Contact</h1>
+        <p className="text-base text-CareerCraftText">
           Make sure employers can reach you by including your name, email, and
           phone number.
         </p>
-      </span>
+      </header>
 
-      <ContactForm resumeData={resumeData}></ContactForm>
+      <div className="flex flex-col gap-4 w-full mx-auto ">
+        <ContactForm
+          resumeData={
+            contactDetails.email !== "" ? useResumeStore.getState() : resumeData
+          }
+        />
+      </div>
     </div>
   );
 };

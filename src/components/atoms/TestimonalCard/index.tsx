@@ -9,7 +9,7 @@ interface CardProps {
 }
 const TestimonalCard = (props: CardProps) => {
   return (
-    <div className="flex flex-col items-start gap-2 bg-CareerCraftForeGround p-4 rounded-md w-full md:max-w-[300px] min-h-[150px]">
+    <div className="flex flex-col items-start gap-2 bg-CareerCraftBackground p-4 rounded-md w-full md:max-w-[300px] min-h-[150px]">
       <div className="flex flex-col md:flex-row gap-4">
         <div className="w-[60px] h-[60px]">
           <Image

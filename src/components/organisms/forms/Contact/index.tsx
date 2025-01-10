@@ -1,6 +1,5 @@
 "use client";
 
-import { storeContactDetails } from "@/app/(user)/(builder)/contact/action";
 import { FormSubmitButton } from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 import React, { useActionState, useEffect, useState } from "react";
@@ -13,7 +12,6 @@ interface ContactFormProps {
 }
 
 const ContactForm: React.FC<ContactFormProps> = (props: ContactFormProps) => {
-  const [state, formAction] = useActionState(storeContactDetails, undefined);
   const { pending } = useFormStatus();
   const [submitted, setSubmitted] = useState(false);
 
@@ -51,7 +49,7 @@ const ContactForm: React.FC<ContactFormProps> = (props: ContactFormProps) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-4 bg-CareerCraftForeGround p-4 rounded-lg shadow-lg w-full items-center"
+      className="flex flex-col gap-4 bg-CareerCraftPrimary/10 p-4 rounded-lg shadow-lg w-full"
     >
       <div className="flex gap-4 flex-wrap w-full">
         <div className="flex flex-col gap-2 flex-1">
@@ -207,6 +205,7 @@ const ContactForm: React.FC<ContactFormProps> = (props: ContactFormProps) => {
           buttonText="Save & Continue"
           pendingText="Saving contact details..."
           type="submit"
+          className="bg-CareerCraftPrimary hover:bg-CareerCraftPrimaryDark text-CareerCraftWhite p-2"
         ></FormSubmitButton>
       </div>
     </form>

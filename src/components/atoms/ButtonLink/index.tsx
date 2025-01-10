@@ -43,7 +43,7 @@ export const ButtonLink = (props: ButtonLinkProps) => {
   return (
     <button
       className={clsx(
-        "text-CareerCraftWhite p-2 text-sm hover:bg-CareerCraftForeGroundLight",
+        "text-CareerCraftWhite p-2 text-sm hover:bg-CareerCraftForeGroundLight rounded-md",
         {
           "bg-CareerCraftPrimary hover:bg-CareerCraftPrimaryDark":
             pathname === props.href,

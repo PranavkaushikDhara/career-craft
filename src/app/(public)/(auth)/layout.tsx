@@ -4,9 +4,9 @@ interface AuthProps {
 }
 const AuthLayout = (props: AuthProps) => {
   return (
-    <div className="flex flex-col min-h-screen justify-center p-6 gap-8 md:flex-row md:justify-around">
+    <div className="flex flex-col min-h-screen justify-center p-6 gap-8 md:flex-row md:justify-around max-w-7xl mx-auto">
       <div className="hidden md:flex flex-col gap-6 items-start justify-center md:flex-1 p-4">
-        <h1 className="text-CareerCraftWhite text-3xl font-bold leading-tight">
+        <h1 className="text-CareerCraftWhite text-5xl font-bold leading-tight">
           Streamline Your Career Success Tools
         </h1>
         <p className="text-CareerCraftText text-base leading-relaxed">

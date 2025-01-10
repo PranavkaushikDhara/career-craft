@@ -14,20 +14,21 @@ const CreateResumeForm: React.FC = () => {
   const { pending } = useFormStatus();
   useEffect(() => {
     if (state && !pending) {
+      localStorage.clear();
       localStorage.setItem("resumeData", JSON.stringify(state));
       router.push("/contact");
     }
   }, [state, pending, router]);
 
   return (
-    <div className="w-full ">
+    <div className="flex flex-col gap-4 bg-gradient-to-tl from-CareerCraftBackground to-CareerCraftPrimary/40 bg-CareerCraftBackground p-4 rounded-lg shadow-lg w-full">
       <Form
         action={formAction}
         className="flex flex-col items-center gap-4 w-full"
       >
         <TextArea
           required={true}
-          className="w-full max-w-lg h-40"
+          className="w-full h-40"
           name="resume"
           placeholder="Please paste your resume content here."
         />
